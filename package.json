@@ -1,0 +1,36 @@
+{
+  "name": "taach",
+  "version": "0.0.0",
+  "description": "Touch input gesture library for Taaspace.",
+  "keywords": [
+    "touch",
+    "transformation",
+    "user interface"
+  ],
+  "homepage": "https://github.com/taataa/taach",
+  "main": "index.js",
+  "author": {
+    "name": "Akseli Palen",
+    "email": "akseli.palen@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/taataa/taach.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "component-emitter": "^1.2.1",
+    "nudged": "^1.0.1"
+  },
+  "devDependencies": {
+    "jshint": "^2.8.0",
+    "semver": "^5.1.0"
+  },
+  "peerDependencies": {
+    "taaspace": "^3.0.0"
+  },
+  "scripts": {
+    "test": "npm run test:lint",
+    "test:lint": "jshint index.js lib/*.js tests/*.js"
+  }
+}

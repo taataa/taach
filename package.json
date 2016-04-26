@@ -31,6 +31,8 @@
     "taaspace": "^3.0.0"
   },
   "scripts": {
+    "start": "ifconfig | grep inet && python3 -m http.server 8000",
+
     "test": "npm run test:lint",
     "test:lint": "jshint index.js lib/*.js",
 

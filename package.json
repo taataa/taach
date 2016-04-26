@@ -23,6 +23,7 @@
     "nudged": "^1.0.1"
   },
   "devDependencies": {
+    "browserify": "^13.0.0",
     "jshint": "^2.8.0",
     "semver": "^5.1.0"
   },
@@ -31,6 +32,9 @@
   },
   "scripts": {
     "test": "npm run test:lint",
-    "test:lint": "jshint index.js lib/*.js tests/*.js"
+    "test:lint": "jshint index.js lib/*.js",
+
+    "build:examples-minimal": "npm run test:examples-minimal && browserify examples/minimal/src/index.js -o examples/minimal/app.js",
+    "test:examples-minimal": "jshint examples/minimal/src/*.js"
   }
 }

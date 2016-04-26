@@ -29,3 +29,6 @@ node_modules
 
 # OS X Related
 *.DS_Store
+
+# Do not include built code
+examples/minimal/app.js

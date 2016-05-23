@@ -11,7 +11,7 @@ Taach's simplistic interaction design is based on usability research and ensures
 - **Respect each finger equally.** If only two fingers are respected in transformations such as scaling then movement of additional fingers do not affect at all which is not the way how objects behave in the physical world familiar to users. [2]
 
 Additional design decisions:
-- **No hover** even for mouse. We treat mouse as a single finger.
+- **No hover** even for mouse. We treat mouse as a single finger. Simpler for developers.
 
 [1] [Microsoft touch design guidelines](https://msdn.microsoft.com/en-us/windows/uwp/input-and-devices/guidelines-for-user-interaction)
 [2] Palen, 2016, Advanced algorithms for manipulating 2D objects on touch screens.
@@ -21,6 +21,14 @@ Additional design decisions:
     $ npm install taach
 
 ## Documentation
+
+Events:
+- transformstart
+- transformmove
+- transformend
+- pressstart
+- pressend
+- tap: a pressend where travel distance is below a threshold
 
 See [wiki](https://github.com/taataa/taach/wiki) for docs.
 

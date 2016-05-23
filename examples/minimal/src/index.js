@@ -13,17 +13,32 @@ staa.translate(staa.atMid(), view.atMid());
 //staa2.translate(staa2.atMidW(), staa.atMidE());
 
 var touch = new taach.Touchable(view, staa);
-touch.setMode({
+touch.start({
   translate: false,
   scale: true,
   rotate: true,
-  press: true
+  press: true,
+  pivot: staa.atMid()
 });
 
-//var touch2 = new taach.Touchable(view, staa2);
+// var touch2 = new taach.Touchable(view, staa2);
 //touch2.setMode({rotate: true, pivot: staa2.atNW()});
 
-touch.on('pressend', function () {
-  console.log('pressend');
-  touch.element.style.border = '1px solid red';
-});
+(function defineLog() {
+  touch.on('transformmove', function (ev) {
+    console.log(ev.totaltravel);
+  });
+}());
+
+(function definePress() {
+  var flag = false;
+  touch.on('tap', function () {
+    console.log('tap');
+    flag = !flag;
+    if (flag) {
+      touch.element.style.opacity = '0.5';
+    } else {
+      touch.element.style.opacity = '1.0';
+    }
+  });
+}());

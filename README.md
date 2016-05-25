@@ -22,7 +22,21 @@ Additional design decisions:
 
 ## Documentation
 
+### taach.Touchable
+
+Create:
+
+    var tou = new taach.Touchable(spaceView, spaceTaa);
+
+Methods:
+
+- start(mode)
+- restart(mode)
+- stop()
+- resume()
+
 Events:
+
 - transformstart
 - transformmove
 - transformend

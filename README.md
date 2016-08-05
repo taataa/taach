@@ -44,7 +44,7 @@ Events:
 - pressend
 - tap: a pressend where travel distance is below a threshold
 
-See [wiki](https://github.com/taataa/taach/wiki) for docs.
+<!--- See [wiki](https://github.com/taataa/taach/wiki) for docs. -->
 
 
 ## License

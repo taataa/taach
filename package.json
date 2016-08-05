@@ -24,8 +24,10 @@
   },
   "devDependencies": {
     "browserify": "^13.0.0",
+    "chai": "^3.5.0",
     "jshint": "^2.8.0",
-    "semver": "^5.1.0",
+    "mochify": "^2.18.1",
+    "semver": "^5.3.0",
     "watch": "^0.18.0"
   },
   "peerDependencies": {
@@ -33,7 +35,8 @@
   },
   "scripts": {
     "start": "ifconfig | grep inet && python3 -m http.server 8000",
-    "test": "npm run test:lint",
+    "test": "npm run test:lint && npm run test:phantom",
+    "test:phantom": "jshint test/*.js && mochify",
     "test:lint": "jshint index.js lib/*.js",
     "test:examples-minimal": "jshint examples/minimal/src/*.js",
     "build:examples-minimal": "npm run test:examples-minimal && browserify examples/minimal/src/index.js -o examples/minimal/app.js && echo 'Build finished.'",

@@ -25,15 +25,29 @@ touch.start({
 //touch2.setMode({rotate: true, pivot: staa2.atNW()});
 
 (function defineLog() {
-  touch.on('transformmove', function (ev) {
-    console.log(ev.totaltravel);
+  touch.on('transformstart', function () {
+    console.log('transformstart');
+  });
+  touch.on('transformmove', function () {
+    console.log('transformmove');
+  });
+  touch.on('transformend', function () {
+    console.log('transformend');
+  });
+  touch.on('pressstart', function () {
+    console.log('pressstart');
+  });
+  touch.on('pressend', function () {
+    console.log('pressend');
+  });
+  touch.on('tap', function () {
+    console.log('tap');
   });
 }());
 
 (function definePress() {
   var flag = false;
   touch.on('tap', function () {
-    console.log('tap');
     flag = !flag;
     if (flag) {
       touch.element.style.opacity = '0.5';

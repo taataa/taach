@@ -1,6 +1,6 @@
 {
   "name": "taach",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Touch input gesture library for Taaspace.",
   "keywords": [
     "touch",
@@ -38,8 +38,13 @@
     "test": "npm run test:lint && npm run test:phantom",
     "test:phantom": "jshint test/*.js && mochify",
     "test:lint": "jshint index.js lib/*.js",
+
     "test:examples-minimal": "jshint examples/minimal/src/*.js",
     "build:examples-minimal": "npm run test:examples-minimal && browserify examples/minimal/src/index.js -o examples/minimal/app.js && echo 'Build finished.'",
-    "watch:examples-minimal": "watch 'npm run build:examples-minimal' examples/minimal/src lib"
+    "watch:examples-minimal": "watch 'npm run build:examples-minimal' examples/minimal/src lib",
+
+    "test:examples-two": "jshint examples/two/src/*.js",
+    "build:examples-two": "npm run test:examples-two && browserify examples/two/src/index.js -o examples/two/app.js && echo 'Build finished.'",
+    "watch:examples-two": "watch 'npm run build:examples-two' examples/two/src lib"
   }
 }

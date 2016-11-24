@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/taach.svg)](https://www.npmjs.com/package/taach)
 
-Touch input gesture library for [Taaspace](https://github.com/taataa/taaspace), a zoomable user interface lib for JavaScript.
+Taach is a [direct manipulation](https://www.nngroup.com/articles/direct-manipulation/) library for [Taaspace](https://github.com/taataa/taaspace), a zoomable user interface lib for JavaScript. Taach recognizes mouse and touch gestures on Taaspace elements and makes the elements react in a natural way.
 
 Taach's simplistic interaction design is based on usability research and ensures good design principles:
 - **No double tap** or triple+ tap gestures. They are hard for users to discover. Instead, updated the interface after each single tap in a way that tells user that another tap is needed.
@@ -14,37 +14,127 @@ Additional design decisions:
 - **No hover** even for mouse. We treat mouse as a single finger. Simpler for developers.
 
 [1] [Microsoft touch design guidelines](https://msdn.microsoft.com/en-us/windows/uwp/input-and-devices/guidelines-for-user-interaction)
-[2] Palen, 2016, Advanced algorithms for manipulating 2D objects on touch screens.
+[2] Palen, 2016, [Advanced algorithms for manipulating 2D objects on touch screens](http://dspace.cc.tut.fi/dpub/handle/123456789/24173).
+
+
 
 ## Install
 
     $ npm install taach
 
-## Documentation
 
-### taach.Touchable
 
-Create:
+## Tutorial
 
-    var tou = new taach.Touchable(spaceView, spaceTaa);
+Let us begin with a simple Taaspace application:
 
-Methods:
+    > var space = new taaspace.Space()
+    > var viewElement = document.getElementById('space')
+    > var view = new taaspace.HTMLSpaceView(space, viewElement)
+    > var hello = new taaspace.SpaceHTML(space, '<h1>Hello</h1>')
 
-- start(mode)
-- restart(mode)
-- stop()
-- resume()
+Our goal is to make `hello` movable and rotatable. For that we create a touch manager:
 
-Events:
+    > var tou = new taach.Touchable(view, hello)
 
-- transformstart
-- transformmove
-- transformend
-- pressstart
-- pressend
-- tap: a pressend where travel distance is below a threshold
+The manager does two things. First, it recognizes the gestures made on the HTML representation of `hello`. Second, it manipulates `hello` according to the gesture. Note that only the gestures on the given `view` are recognized. On the other hand, the consequences are visible also on other views of the same space.
 
-<!--- See [wiki](https://github.com/taataa/taach/wiki) for docs. -->
+The manager does not recognize anything yet. We need to activate it first by calling `start`. Also, we specify *the mode* of interaction which means the type of interaction we would like to allow.
+
+    > tou.start({
+        translate: true,
+        rotate: true
+      })
+
+The main properties of the mode are `translate`, `rotate`, `scale`, and `tap`. They all are `false` by default. There is also a `pivot` property which is a bit special. The `pivot` takes in a `SpacePoint` and restricts the rotation and scaling to happen only around it.
+
+The mode can be changed even during an ongoing gesture with `restart` method. The following disables the translation and rotation but instead allows scaling around the middle of the `hello`.
+
+    > tou.restart({
+        scale: true,
+        pivot: hello.atMid()
+      })
+
+The workings of the manager can be deactivated by calling `stop` method. An inactive manager does not recognize gestures or modify `hello`. After `stop`, you can activate the manager by calling `start` or `restart` with a mode or just reuse the stopped mode by calling `resume`.
+
+    > tou.stop()
+    > tou.resume()
+
+An active manager emits events about the recognized gestures. One of such events is `tap` which is fired after short click-like gestures if `tap: true`. The events are accompanied with an event object and can be listened in the following manner:
+
+    > tou.on('transformend', function (ev) {
+        console.log(ev.duration)
+      })
+
+This tutorial covered the most about Taach's API. The details about the methods and events can be found in the API Reference below.
+
+
+
+## API Reference
+
+### taach.Touchable(spaceView, spaceTransformer)
+
+A manager that maps pointer events on a HTML representation to a transformations and applies the transformation to the represented `SpaceTransformer` instance.
+
+**Construction:**
+
+    > var tou = new taach.Touchable(spaceView, spaceTransformer);
+
+**Parameters:**
+
+- *spaceView:* an instance of `taaspace.HTMLSpaceView`. Only the gestures made on this view will be listened and recognized.
+- *spaceTransformer:* an instance of `taaspace.SpaceTransformer` such as `SpaceHTML`, `SpacePixel`, `SpaceTaa`, or `HTMLSpaceView`. Only the gestures made on the HTML representation of the instance are listened and recognized. The instance receives the manipulations specified by the mode.
+
+**Properties:**
+
+- *view:* the given `HTMLSpaceView`
+- *transformer:* the given `SpaceTransformer`
+- *element:* the [HTMLElement](https://developer.mozilla.org/en/docs/Web/API/HTMLElement) that receives the original pointer events.
+- *mode:* the current mode object.
+
+**Methods:**
+
+- *start(mode):* activates the manager in the given mode. If no mode is given, the default mode is used. Can be called on already active manager to update the mode.
+- *restart(mode):* alias of `start(mode)` but can make the code more readable when updating the mode of an already active manager.
+- *stop():* deactivates the manager. An inactive manager fires no events and listens no gestures.
+- *resume():* starts the manager with the last known mode.
+
+**Mode:**
+
+The mode object defines the allowed types of manipulation. Some types are not possible together so a type can override another. The full list of the mode properties and their conflicts is given below.
+
+- *translate:* set `true` to allow horizontal and vertical movement. Default is `false`. If `pivot` is specified the value of `translate` has no effect.
+- *rotate:* set `true` to allow rotation. If `translate: false` and `pivot` is not specified the rotation is allowed only around the center of the transformer. Default is `false`.
+- *scale:* set `true` to allow scaling. If `translate: false` and `pivot` is not specified the scaling is allowed only around the center of the transformer. Default is `false`.
+- *pivot:* set to a `SpacePoint` to specify a pivot for rotation and scaling. If `pivot` is specified the value of `translate` has no effect. Default is `null`.
+- *tap:* set to `true` to allow emitting of `tap` event. Default is `false`.
+- *tapMaxTravel:*  Default is 20.
+
+The default mode is accessible at `taach.Touchable.DEFAULT_MODE`.
+
+**Events:**
+
+The manager emits the following events:
+
+- *transformstart:* fired at the beginning of the gesture when the first pointer lands on the element.
+- *transformmove:* fired when a pointer on the element moves so that the transformation changes.
+- *transformend:* fired when the last pointer is lifted off from the element.
+- *tap:* fired if all the following statements are true: 1) mode has `tap: true`, 2) last finger or other pointer was lifted from the element, and 3) pointers did not move during the gesture more in average than what is allowed by a threshold value. The default threshold of `20` can be overridden by an additional mode property `tapMaxTravel`.
+
+The events are fired with an event object. The object has the following properties:
+
+- *duration:* a number. Milliseconds from `transformstart`
+- *microTrans:* a `taaspace.SpaceTransform`. A small transformation between this and the previous event.
+- *totalTrans:* a `taaspace.SpaceTransform`. The product of micro transformations after `transformstart`.
+- *totalTravel:* a number. An average manhattan distance in screen pixels that a pointer has traveled after `transformstart`.
+
+### taach.version
+
+The version string. Identical to version string in package.json.
+
+    > taach.version
+    '1.2.3'
+
 
 
 ## License

@@ -32,4 +32,5 @@ node_modules
 
 # Do not include built code
 examples/minimal/app.js
+examples/view/app.js
 examples/two/app.js

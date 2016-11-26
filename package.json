@@ -45,6 +45,10 @@
 
     "test:examples-two": "jshint examples/two/src/*.js",
     "build:examples-two": "npm run test:examples-two && browserify examples/two/src/index.js -o examples/two/app.js && echo 'Build finished.'",
-    "watch:examples-two": "watch 'npm run build:examples-two' examples/two/src lib"
+    "watch:examples-two": "watch 'npm run build:examples-two' examples/two/src lib",
+
+    "test:examples-view": "jshint examples/view/src/*.js",
+    "build:examples-view": "npm run test:examples-view && browserify examples/view/src/index.js -o examples/view/app.js && echo 'Build finished.'",
+    "watch:examples-view": "watch 'npm run build:examples-view' examples/view/src lib"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "taach",
-  "version": "1.1.1",
+  "version": "2.0.0-alpha.1",
   "description": "Touch input gesture library for Taaspace.",
   "keywords": [
     "touch",
@@ -31,7 +31,7 @@
     "watch": "^1.0.1"
   },
   "peerDependencies": {
-    "taaspace": "^3.0.0"
+    "taaspace": "taataa/taaspace#development"
   },
   "scripts": {
     "start": "ifconfig | grep inet && python3 -m http.server 8000",

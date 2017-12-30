@@ -24,10 +24,11 @@
   },
   "devDependencies": {
     "browserify": "^13.1.1",
-    "chai": "^3.5.0",
-    "jshint": "^2.9.4",
-    "mochify": "^2.18.1",
-    "semver": "^5.3.0",
+    "genversion": "^1.1.3",
+    "semver": "^5.4.1",
+    "standard": "*",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.8.0",
     "watch": "^1.0.1"
   },
   "peerDependencies": {
@@ -35,19 +36,17 @@
   },
   "scripts": {
     "start": "ifconfig | grep inet && python3 -m http.server 8000",
-    "test": "npm run test:lint && npm run test:phantom",
-    "test:phantom": "jshint test/*.js && mochify",
-    "test:lint": "jshint index.js lib/*.js",
-
-    "test:examples-minimal": "jshint examples/minimal/src/*.js",
+    "test": "tape 'test/**/*.test.js'",
+    "lint": "standard 'lib/**/*.js' 'test/**/*.js' && echo 'OK'",
+    "lintfix": "standard --fix 'lib/**/*.js' 'test/**/*.js'",
+    "gv": "genversion lib/version.js",
+    "test:examples-minimal": "standard 'examples/minimal/**/*.js'",
     "build:examples-minimal": "npm run test:examples-minimal && browserify examples/minimal/src/index.js -o examples/minimal/app.js && echo 'Build finished.'",
     "watch:examples-minimal": "watch 'npm run build:examples-minimal' examples/minimal/src lib",
-
-    "test:examples-two": "jshint examples/two/src/*.js",
+    "test:examples-two": "standard 'examples/two/**/*.js'",
     "build:examples-two": "npm run test:examples-two && browserify examples/two/src/index.js -o examples/two/app.js && echo 'Build finished.'",
     "watch:examples-two": "watch 'npm run build:examples-two' examples/two/src lib",
-
-    "test:examples-view": "jshint examples/view/src/*.js",
+    "test:examples-view": "standard 'examples/view/src/*.js'",
     "build:examples-view": "npm run test:examples-view && browserify examples/view/src/index.js -o examples/view/app.js && echo 'Build finished.'",
     "watch:examples-view": "watch 'npm run build:examples-view' examples/view/src lib"
   }

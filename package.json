@@ -23,20 +23,29 @@
     "nudged": "^1.2.0"
   },
   "devDependencies": {
-    "browserify": "^13.1.1",
+    "file-loader": "^1.1.5",
     "genversion": "^2.0.1",
+    "jquery": "^3.2.1",
     "semver": "^5.4.1",
     "standard": "*",
     "tap-spec": "^4.1.1",
     "tape": "^4.8.0",
-    "watch": "^1.0.1"
+    "tape-run": "^3.0.1",
+    "url-loader": "^0.6.2",
+    "watch": "^1.0.1",
+    "webpack": "^3.10.0",
+    "webpack-livereload-plugin": "^1.0.0",
+    "webpack-tape-run": "0.0.7"
   },
   "peerDependencies": {
     "taaspace": "taataa/taaspace#development"
   },
   "scripts": {
     "start": "ifconfig | grep inet && python3 -m http.server 8000",
-    "test": "tape 'test/**/*.test.js'",
+    "test": "npm -s run test:headless",
+    "test:headless": "webpack --config test/webpack.headless.config.js",
+    "test:headless:watch": "webpack --watch --config test/webpack.headless.config.js",
+    "test:browser:watch": "webpack --watch --config test/webpack.browser.config.js",
     "lint": "standard 'lib/**/*.js' 'test/**/*.js' && echo 'OK'",
     "lintfix": "standard --fix 'lib/**/*.js' 'test/**/*.js'",
     "gv": "genversion lib/version.js",

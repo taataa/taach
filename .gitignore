@@ -1,3 +1,12 @@
+# Bundle builds
+/dist/*
+!/dist/.gitkeep
+/test/dist/*
+!/test/dist/.gitkeep
+examples/minimal/app.js
+examples/view/app.js
+examples/two/app.js
+
 # Logs
 logs
 *.log
@@ -29,8 +38,3 @@ node_modules
 
 # OS X Related
 *.DS_Store
-
-# Do not include built code
-examples/minimal/app.js
-examples/view/app.js
-examples/two/app.js

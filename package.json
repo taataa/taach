@@ -46,14 +46,11 @@
     "test:headless": "webpack --config test/webpack.headless.config.js",
     "test:headless:watch": "webpack --watch --config test/webpack.headless.config.js",
     "test:browser:watch": "webpack --watch --config test/webpack.browser.config.js",
-    "lint": "standard 'lib/**/*.js' 'test/**/*.js' && echo 'OK'",
-    "lintfix": "standard --fix 'lib/**/*.js' 'test/**/*.js'",
+    "lint": "standard 'lib/**/*.js' 'test/**/*.js' 'examples/**/*.js' && echo 'OK'",
+    "lintfix": "standard --fix 'lib/**/*.js' 'test/**/*.js' 'examples/**/*.js'",
     "gv": "genversion lib/version.js",
-    "test:ex:minimal": "standard 'examples/minimal/**/*.js'",
     "build:ex:minimal": "webpack --watch --config examples/minimal/webpack.config.js",
-    "test:ex:two": "standard 'examples/two/**/*.js'",
     "build:ex:two": "webpack --watch --config examples/two/webpack.config.js",
-    "test:ex:view": "standard 'examples/view/src/*.js'",
     "build:ex:view": "webpack --watch --config examples/view/webpack.config.js"
   }
 }

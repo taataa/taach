@@ -1,9 +1,6 @@
 # Bundle builds
-/dist/*
-!/dist/.gitkeep
-/test/dist/*
-!/test/dist/.gitkeep
-examples/minimal/app.js
+**/dist/*
+!**/dist/.gitkeep
 examples/view/app.js
 examples/two/app.js
 
@@ -37,4 +34,4 @@ node_modules
 .lock-wscript
 
 # OS X Related
-*.DS_Store
+**/.DS_Store

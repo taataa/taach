@@ -53,8 +53,7 @@
     "build:ex:minimal": "webpack --watch --config examples/minimal/webpack.config.js",
     "test:ex:two": "standard 'examples/two/**/*.js'",
     "build:ex:two": "webpack --watch --config examples/two/webpack.config.js",
-    "test:examples-view": "standard 'examples/view/src/*.js'",
-    "build:examples-view": "npm run test:examples-view && browserify examples/view/src/index.js -o examples/view/app.js && echo 'Build finished.'",
-    "watch:examples-view": "watch 'npm run build:examples-view' examples/view/src lib"
+    "test:ex:view": "standard 'examples/view/src/*.js'",
+    "build:ex:view": "webpack --watch --config examples/view/webpack.config.js"
   }
 }

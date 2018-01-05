@@ -51,9 +51,8 @@
     "gv": "genversion lib/version.js",
     "test:ex:minimal": "standard 'examples/minimal/**/*.js'",
     "build:ex:minimal": "webpack --watch --config examples/minimal/webpack.config.js",
-    "test:examples-two": "standard 'examples/two/**/*.js'",
-    "build:examples-two": "npm run test:examples-two && browserify examples/two/src/index.js -o examples/two/app.js && echo 'Build finished.'",
-    "watch:examples-two": "watch 'npm run build:examples-two' examples/two/src lib",
+    "test:ex:two": "standard 'examples/two/**/*.js'",
+    "build:ex:two": "webpack --watch --config examples/two/webpack.config.js",
     "test:examples-view": "standard 'examples/view/src/*.js'",
     "build:examples-view": "npm run test:examples-view && browserify examples/view/src/index.js -o examples/view/app.js && echo 'Build finished.'",
     "watch:examples-view": "watch 'npm run build:examples-view' examples/view/src lib"

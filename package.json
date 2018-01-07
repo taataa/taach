@@ -50,7 +50,7 @@
     "lintfix": "standard --fix 'lib/**/*.js' 'test/**/*.js' 'examples/**/*.js'",
     "gv": "genversion lib/version.js",
     "build:ex:minimal": "webpack --watch --config examples/minimal/webpack.config.js",
-    "build:ex:two": "webpack --watch --config examples/two/webpack.config.js",
+    "build:ex:modes": "webpack --watch --config examples/modes/webpack.config.js",
     "build:ex:view": "webpack --watch --config examples/view/webpack.config.js"
   }
 }

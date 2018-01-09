@@ -31,5 +31,4 @@ data.forEach(function (d, i) {
   touch.start(mode)
 })
 
-view.fit(g.getHull())
-view.scale(view.atMid(), 2)
+view.fitScale(g)

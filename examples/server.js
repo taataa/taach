@@ -21,9 +21,12 @@ var serveStatic = require('serve-static')
 var ip = require('ip')
 var qrcode = require('qrcode-terminal')
 
-var index = serveIndex(__dirname, { icons: true, filter: function (fname) {
-  return fname !== 'server.js' && fname !== 'assets'
-}})
+var index = serveIndex(__dirname, {
+  icons: true,
+  filter: function (fname) {
+    return fname !== 'server.js' && fname !== 'assets'
+  }
+})
 var serve = serveStatic(__dirname)
 
 var server = http.createServer(function (req, res) {

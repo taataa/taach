@@ -24,9 +24,14 @@
   },
   "devDependencies": {
     "file-loader": "^1.1.5",
+    "finalhandler": "^1.1.0",
     "genversion": "^2.0.1",
+    "ip": "^1.1.5",
     "jquery": "^3.2.1",
+    "qrcode-terminal": "^0.11.0",
     "semver": "^5.4.1",
+    "serve-index": "^1.9.1",
+    "serve-static": "^1.13.1",
     "standard": "*",
     "tap-spec": "^4.1.1",
     "tape": "^4.8.0",
@@ -41,7 +46,7 @@
     "taaspace": "taataa/taaspace#development"
   },
   "scripts": {
-    "start": "ifconfig | grep inet && python3 -m http.server 8000",
+    "start": "npm -s run build:examples && node examples/server.js",
     "test": "npm -s run test:headless",
     "test:headless": "webpack --config test/webpack.headless.config.js",
     "test:headless:watch": "webpack --watch --config test/webpack.headless.config.js",
@@ -49,8 +54,9 @@
     "lint": "standard 'lib/**/*.js' 'test/**/*.js' 'examples/**/*.js' && echo 'OK'",
     "lintfix": "standard --fix 'lib/**/*.js' 'test/**/*.js' 'examples/**/*.js'",
     "gv": "genversion lib/version.js",
-    "build:ex:minimal": "webpack --watch --config examples/minimal/webpack.config.js",
-    "build:ex:modes": "webpack --watch --config examples/modes/webpack.config.js",
-    "build:ex:view": "webpack --watch --config examples/view/webpack.config.js"
+    "build:examples": "npm -s run build:ex:minimal && npm -s run build:ex:modes && npm -s run build:ex:view",
+    "build:ex:minimal": "webpack --config examples/minimal/webpack.config.js",
+    "build:ex:modes": "webpack --config examples/modes/webpack.config.js",
+    "build:ex:view": "webpack --config examples/view/webpack.config.js"
   }
 }

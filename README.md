@@ -23,7 +23,6 @@ Additional design decisions:
     $ npm install taach
 
 
-
 ## Tutorial
 
 Let us begin with a simple Taaspace application:
@@ -130,24 +129,36 @@ The events are fired with an event object. The event object has the following pr
 
 ### taach.version
 
-The version string. Identical to version string in package.json.
+The version string. Identical to the version string in package.json.
 
     > taach.version
     '1.2.3'
 
 
-## Architecture
+## For developers
+
+### Architecture
 
 Dependency tree:
 
 - taach
   - version
   - Touchable
-    - MicroManager
+    - Manager
       - taaspace
-      - MicroRecognizer
-        - MicroModel
-          - nudged
+      - nudged
+      - Recognizer
+
+
+### Example applications
+
+Build an example app:
+
+    $ npm run build:ex:<appname>
+
+Play with the apps on devices in the same local network, by starting a local static file server. It will give you a QR code of the URL to the examples.
+
+    $ npm start
 
 ## License
 

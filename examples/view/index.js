@@ -9,15 +9,20 @@ view.mount(viewElement)
 taaspace.preload('../assets/chellah_star.jpg', function (err, img) {
   if (err) { throw err }
 
-  var staa = new taaspace.SpaceImage(space, img)
+  var g = new taaspace.SpaceGroup(space)
+  var simg1 = new taaspace.SpaceImage(g, img)
+  var simg2 = new taaspace.SpaceImage(g, img)
 
-  staa.translate(staa.atMid(), view.atMid())
+  view.fitScale(g)
+  view.scale(view.atMid(), 1.618)
 
-  var touch = new taach.Touchable(view, staa)
-  touch.start({ tap: true, scale: true, rotate: true, translate: true })
+  var touch1 = new taach.Touchable(view, simg1)
+  var touch2 = new taach.Touchable(view, simg2)
+  touch1.start({ translate: true, scale: true, rotate: true })
+  touch2.start({ translate: true, scale: true, rotate: true })
 
   var viewTouch = new taach.Touchable(view, view)
-  viewTouch.start({ translate: true });
+  viewTouch.start({ translate: true, scale: true, rotate: true, tap: true });
 
   (function defineLog () {
     viewTouch.on('transformstart', function () {

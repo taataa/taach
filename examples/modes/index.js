@@ -7,6 +7,7 @@ var view = new taaspace.SpaceViewHTML(space)
 view.mount(viewElement)
 
 var data = [
+  // RRGGBB
   ['#000000', {}],
   ['#FF0000', { translate: true }],
   ['#00FF00', { scale: true }],

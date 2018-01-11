@@ -46,7 +46,7 @@
     "taaspace": "taataa/taaspace#development"
   },
   "scripts": {
-    "start": "npm -s run build:examples && node examples/server.js",
+    "start": "node examples/server.js",
     "test": "npm -s run test:headless",
     "test:headless": "webpack --config test/webpack.headless.config.js",
     "test:headless:watch": "webpack --watch --config test/webpack.headless.config.js",
@@ -54,9 +54,9 @@
     "lint": "standard 'lib/**/*.js' 'test/**/*.js' 'examples/**/*.js' && echo 'OK'",
     "lintfix": "standard --fix 'lib/**/*.js' 'test/**/*.js' 'examples/**/*.js'",
     "gv": "genversion lib/version.js",
-    "build:examples": "npm -s run build:ex:minimal && npm -s run build:ex:modes && npm -s run build:ex:view",
-    "build:ex:minimal": "webpack --config examples/minimal/webpack.config.js",
-    "build:ex:modes": "webpack --config examples/modes/webpack.config.js",
-    "build:ex:view": "webpack --config examples/view/webpack.config.js"
+    "build:ex:grid": "webpack --watch --config examples/grid/webpack.config.js",
+    "build:ex:minimal": "webpack --watch --config examples/minimal/webpack.config.js",
+    "build:ex:modes": "webpack --watch --config examples/modes/webpack.config.js",
+    "build:ex:view": "webpack --watch --config examples/view/webpack.config.js"
   }
 }

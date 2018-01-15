@@ -33,24 +33,31 @@ taaspace.preload([
   }
 
   var g = new taaspace.SpaceGroup(space)
-  var diag = new taaspace.Vector(SIDE, SIDE)
   var rows = Math.ceil(Math.sqrt(imgs.length))
   var touchmode = { translate: true, scale: true, rotate: true }
 
   imgs.forEach(function (img, i) {
     // Create
     var px = new taaspace.SpaceImage(g, img)
-    px.setLocalSize(diag)
 
     // Position
-    var x = SIDE * (i % rows)
-    var y = SIDE * Math.floor(i / rows)
-    px.translate(px.atNW(), space.at(x, y))
+    var x = i % rows
+    var y = Math.floor(i / rows)
+    var h = grid.getHullOf(x, y)
+    px.fitSize(h)
+    px.translate(px.atNW(), space.at(SIDE * x, SIDE * y))
+
+    // TODO make this work:
+    // var x = i % rows
+    // var y = Math.floor(i / rows)
+    // var h = grid.getHullOf(x, y)
+    // px.fitSize(h)
 
     // Define interaction
     var touch = new taach.Touchable(view, px)
     touch.start(touchmode)
     touch.on('transformend', function () {
+      // TODO snapHull? snapAt? grid.getHullAt(x, y)?
       px.snap(px.atMid(), grid)
     })
   })

@@ -6,57 +6,60 @@ var viewElement = document.getElementById('space')
 var view = new taaspace.SpaceViewHTML(space)
 view.mount(viewElement)
 
+// Width and height of a grid tile
+var SIDE = 128
+
+// Snapping grid
 var grid = new taaspace.InvariantGrid(new taaspace.Grid({
-  xStep: 64,
-  yStep: 64,
-  rotateStep: Math.PI / 4,
-  scaleStep: 1000,
+  xStep: SIDE,
+  xPhase: SIDE / 2,
+  yStep: SIDE,
+  yPhase: SIDE / 2,
+  rotateStep: Math.PI / 2,
+  scaleStep: 10000,
   scalePhase: 1
 }), space)
 
-var g = new taaspace.SpaceGroup(space)
-var px1 = new taaspace.SpacePixel(g, '#E2AA9B')
-var px2 = new taaspace.SpacePixel(g, '#976773')
-var px3 = new taaspace.SpacePixel(g, '#49224E')
-var px4 = new taaspace.SpacePixel(g, '#2E0F39')
+// Load images
+taaspace.preload([
+  'assets/tile00.png',
+  'assets/tile01.png',
+  'assets/tile02.png',
+  'assets/tile03.png'
+], function (err, imgs) {
+  if (err) {
+    console.error(err)
+    throw err
+  }
 
-var diag = new taaspace.Vector(128, 128)
-px1.setLocalSize(diag)
-px2.setLocalSize(diag)
-px3.setLocalSize(diag)
-px4.setLocalSize(diag)
+  var g = new taaspace.SpaceGroup(space)
+  var diag = new taaspace.Vector(SIDE, SIDE)
+  var rows = Math.ceil(Math.sqrt(imgs.length))
+  var touchmode = { translate: true, scale: true, rotate: true }
 
-px1.translate(px1.atNW(), space.at(0, 0))
-px2.translate(px2.atNW(), space.at(128, 0))
-px3.translate(px3.atNW(), space.at(0, 128))
-px4.translate(px4.atNW(), space.at(128, 128))
+  imgs.forEach(function (img, i) {
+    // Create
+    var px = new taaspace.SpaceImage(g, img)
+    px.setLocalSize(diag)
 
-view.fitScale(g)
-view.scale(view.atMid(), 1.618)
+    // Position
+    var x = SIDE * (i % rows)
+    var y = SIDE * Math.floor(i / rows)
+    px.translate(px.atNW(), space.at(x, y))
 
-var t1 = new taach.Touchable(view, px1)
-var t2 = new taach.Touchable(view, px2)
-var t3 = new taach.Touchable(view, px3)
-var t4 = new taach.Touchable(view, px4)
+    // Define interaction
+    var touch = new taach.Touchable(view, px)
+    touch.start(touchmode)
+    touch.on('transformend', function () {
+      px.snap(px.atMid(), grid)
+    })
+  })
 
-var touchmode = { translate: true, scale: true, rotate: true }
-t1.start(touchmode)
-t2.start(touchmode)
-t3.start(touchmode)
-t4.start(touchmode)
+  // Initial view position
+  view.fitScale(g)
+  view.scale(view.atMid(), 1.618)
 
-var tView = new taach.Touchable(view, view)
-tView.start(touchmode)
-
-t1.on('transformend', function () {
-  px1.snap(px1.atMid(), grid)
-})
-t2.on('transformend', function () {
-  px2.snap(px2.atMid(), grid)
-})
-t3.on('transformend', function () {
-  px3.snap(px3.atMid(), grid)
-})
-t4.on('transformend', function () {
-  px4.snap(px4.atMid(), grid)
+  // Make view transformable
+  var tView = new taach.Touchable(view, view)
+  tView.start(touchmode)
 })

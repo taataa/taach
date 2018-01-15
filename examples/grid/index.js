@@ -9,7 +9,9 @@ view.mount(viewElement)
 var grid = new taaspace.InvariantGrid(new taaspace.Grid({
   xStep: 64,
   yStep: 64,
-  rotateStep: Math.PI
+  rotateStep: Math.PI / 4,
+  scaleStep: 1000,
+  scalePhase: 1
 }), space)
 
 var g = new taaspace.SpaceGroup(space)
@@ -37,7 +39,7 @@ var t2 = new taach.Touchable(view, px2)
 var t3 = new taach.Touchable(view, px3)
 var t4 = new taach.Touchable(view, px4)
 
-var touchmode = { translate: true, rotate: true }
+var touchmode = { translate: true, scale: true, rotate: true }
 t1.start(touchmode)
 t2.start(touchmode)
 t3.start(touchmode)
@@ -47,14 +49,14 @@ var tView = new taach.Touchable(view, view)
 tView.start(touchmode)
 
 t1.on('transformend', function () {
-  px1.snap(grid)
+  px1.snap(px1.atMid(), grid)
 })
 t2.on('transformend', function () {
-  px2.snap(grid)
+  px2.snap(px2.atMid(), grid)
 })
 t3.on('transformend', function () {
-  px3.snap(grid)
+  px3.snap(px3.atMid(), grid)
 })
 t4.on('transformend', function () {
-  px4.snap(grid)
+  px4.snap(px4.atMid(), grid)
 })

@@ -45,7 +45,6 @@ taaspace.preload([
     var y = Math.floor(i / rows)
     var h = grid.getHullOf(x, y)
     px.fitSize(h)
-<<<<<<< HEAD
     px.translate(px.atNW(), space.at(SIDE * x, SIDE * y))
 
     // TODO make this work:
@@ -53,19 +52,13 @@ taaspace.preload([
     // var y = Math.floor(i / rows)
     // var h = grid.getHullOf(x, y)
     // px.fitSize(h)
-=======
->>>>>>> d6e51a1e7fc2838144c865f1873770ff8d97f870
 
     // Define interaction
     var touch = new taach.Touchable(view, px)
     touch.start(touchmode)
     touch.on('transformend', function () {
-<<<<<<< HEAD
       // TODO snapHull? snapAt? grid.getHullAt(x, y)?
       px.snap(px.atMid(), grid)
-=======
-      px.snap(px.atNW(), grid)
->>>>>>> d6e51a1e7fc2838144c865f1873770ff8d97f870
     })
   })
 

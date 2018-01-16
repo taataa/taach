@@ -40,24 +40,17 @@ taaspace.preload([
     // Create
     var px = new taaspace.SpaceImage(g, img)
 
-    // Position
+    // Position & snap scale
     var x = i % rows
     var y = Math.floor(i / rows)
-    var h = grid.getHullOf(x, y)
-    px.fitSize(h)
-    px.translate(px.atNW(), space.at(SIDE * x, SIDE * y))
-
-    // TODO make this work:
-    // var x = i % rows
-    // var y = Math.floor(i / rows)
-    // var h = grid.getHullOf(x, y)
-    // px.fitSize(h)
+    px.setLocalSize(new taaspace.Vector(SIDE, SIDE))
+    px.translate(px.atMid(), grid.at(x, y))
+    px.snap(px.atMid(), grid)
 
     // Define interaction
     var touch = new taach.Touchable(view, px)
     touch.start(touchmode)
     touch.on('transformend', function () {
-      // TODO snapHull? snapAt? grid.getHullAt(x, y)?
       px.snap(px.atMid(), grid)
     })
   })

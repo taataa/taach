@@ -22,10 +22,10 @@ var grid = new taaspace.InvariantGrid(new taaspace.Grid({
 
 // Load images
 taaspace.preload([
-  'assets/tile00.png',
-  'assets/tile01.png',
-  'assets/tile02.png',
-  'assets/tile03.png'
+  '../assets/tile00.png',
+  '../assets/tile01.png',
+  '../assets/tile02.png',
+  '../assets/tile03.png'
 ], function (err, imgs) {
   if (err) {
     console.error(err)

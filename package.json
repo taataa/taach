@@ -54,6 +54,7 @@
     "lint": "standard 'lib/**/*.js' 'test/**/*.js' 'examples/**/*.js' && echo 'OK'",
     "lintfix": "standard --fix 'lib/**/*.js' 'test/**/*.js' 'examples/**/*.js'",
     "gv": "genversion lib/version.js",
+    "build:ex:tiles": "webpack --watch --config examples/tiles/webpack.config.js",
     "build:ex:grid": "webpack --watch --config examples/grid/webpack.config.js",
     "build:ex:minimal": "webpack --watch --config examples/minimal/webpack.config.js",
     "build:ex:modes": "webpack --watch --config examples/modes/webpack.config.js",

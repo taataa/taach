@@ -36,7 +36,7 @@ taaspace.preload([
   }
 
   // Space size
-  var W = 10
+  var W = 20
 
   // Additional container
   var g = new taaspace.SpaceGroup(space)

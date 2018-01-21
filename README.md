@@ -122,10 +122,10 @@ The manager emits the following events:
 
 The events are fired with an event object. The event object has the following properties:
 
+- *distance:* a number. An average manhattan distance in screen pixels that a pointer has traveled after `transformstart`.
 - *duration:* a number. Milliseconds from the `transformstart`
-- *microTrans:* a `taaspace.InvariantTransform`. A small transformation between this and the previous event.
-- *totalTrans:* a `taaspace.InvariantTransform`. The product of micro transformations after the `transformstart`.
-- *totalTravel:* a number. An average manhattan distance in screen pixels that a pointer has traveled after `transformstart`.
+- *element:* a HTMLElement. The source of the original pointer events.
+- *spaceNode:* a taaspace.SpaceNode. The SpaceNode of the HTMLElement.
 
 ### taach.version
 

@@ -41,6 +41,12 @@ taaspace.preload([
   // Additional container
   var g = new taaspace.SpaceGroup(space)
 
+  // Handler for tap events. Better here than inside a loop.
+  var tapHandler = function (ev) {
+    var n = ev.spaceNode
+    n.rotate(n.atMid(), Math.PI / 2)
+  }
+
   var i, j, px, img, touch
   for (i = 0; i < W; i += 1) {
     for (j = 0; j < W; j += 1) {
@@ -51,14 +57,15 @@ taaspace.preload([
         0, Math.PI / 2, Math.PI, -Math.PI / 2
       ]))
 
-      /*// Define interaction
+      // Define interaction.
+      // Setting "propagate: true" we allow transformations on the view
+      // in addition to tap event recognition.
       touch = new taach.Touchable(view, px)
       touch.start({
-        tap: true
+        tap: true,
+        propagate: true
       })
-      touch.on('transformend', function () {
-        px.snap(px.atMid(), grid)
-      })*/
+      touch.on('tap', tapHandler)
     }
   }
 

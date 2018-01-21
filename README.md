@@ -129,7 +129,7 @@ The events are fired with an event object. The event object has the following pr
 
 ### taach.version
 
-The version string. Identical to the version string in package.json.
+The semantic version string. Identical to the version string in package.json.
 
     > taach.version
     '1.2.3'

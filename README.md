@@ -71,23 +71,23 @@ This tutorial covered the most about Taach's API. The details about the methods 
 
 ## API Reference
 
-### taach.Touchable(spaceView, spaceTransformer)
+### taach.Touchable(view, plane)
 
-A manager that maps pointer events on a HTML representation to a transformations and applies the transformation to the represented `SpaceTransformer` instance.
+A manager that maps pointer events on a HTML representation to a transformations and applies the transformation to the given `taaspace.SpacePlane` instance.
 
 **Construction:**
 
-    > var tou = new taach.Touchable(spaceView, spaceTransformer);
+    > var tou = new taach.Touchable(view, plane);
 
 **Parameters:**
 
-- *spaceView:* an instance of `taaspace.SpaceViewHTML`. Only the gestures made on this view will be listened and recognized.
-- *spaceTransformer:* an instance of `taaspace.SpaceTransformer` such as `SpaceHTML`, `SpacePixel`, `SpaceGroup`, or `SpaceViewHTML`. Only the gestures made on the HTML representation of the instance are listened and recognized. The instance reacts to the manipulations specified by the mode.
+- *view:* an instance of `taaspace.SpaceViewHTML`. Only the gestures made on this view will be listened and recognized.
+- *plane:* an instance of `taaspace.SpacePlane` such as `SpaceHTML`, `SpacePixel`, `SpaceGroup`, or `SpaceViewHTML`. Only the gestures made on the HTML representation of the instance are listened and recognized. The instance reacts to the manipulations as specified by the mode.
 
 **Properties:**
 
 - *view:* the given `SpaceViewHTML`
-- *transformer:* the given `SpaceTransformer`
+- *plane:* the given `SpacePlane`
 - *element:* the [HTMLElement](https://developer.mozilla.org/en/docs/Web/API/HTMLElement) that receives the original pointer events.
 - *mode:* the current mode object.
 
@@ -125,7 +125,7 @@ The events are fired with an event object. The event object has the following pr
 - *distance:* a number. An average manhattan distance in screen pixels that a pointer has traveled after `transformstart`.
 - *duration:* a number. Milliseconds from the `transformstart`
 - *element:* a HTMLElement. The source of the original pointer events.
-- *spaceNode:* a taaspace.SpaceNode. The SpaceNode of the HTMLElement.
+- *plane:* a taaspace.SpacePlane. The SpacePlane instance of the HTMLElement.
 
 ### taach.version
 

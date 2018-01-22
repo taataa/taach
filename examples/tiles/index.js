@@ -43,7 +43,7 @@ taaspace.preload([
 
   // Handler for tap events. Better here than inside a loop.
   var tapHandler = function (ev) {
-    var n = ev.spaceNode
+    var n = ev.plane
     n.rotate(n.atMid(), Math.PI / 2)
   }
 

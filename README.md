@@ -45,7 +45,7 @@ The manager does not recognize anything yet. We need to activate it first by cal
         rotate: true
       })
 
-The main properties of the mode are `translate`, `rotate`, `scale`, and `tap`. They all are `false` by default. There is also a `pivot` property which is a bit special. The `pivot` takes in an `InvariantVector` and restricts the rotation and scaling to happen only around it.
+The main properties of the mode are `translate`, `rotate`, `scale`, and `tap`. They all are `false` by default. There is also a `pivot` property which is a bit special. The `pivot` takes in an `IVector` and restricts the rotation and scaling to happen only around it.
 
 The mode can be changed even during an ongoing gesture with `restart` method. The following disables the translation and rotation but instead allows scaling around the middle of the `hello`.
 
@@ -105,7 +105,7 @@ The mode object defines the allowed types of manipulation. Some types are not po
 - *translate:* set `true` to allow horizontal and vertical movement. Default is `false`. If `pivot` is specified the value of `translate` has no effect.
 - *rotate:* set `true` to allow rotation. If `translate: false` and `pivot` is not specified the rotation is allowed only around the center of the transformer. Default is `false`.
 - *scale:* set `true` to allow scaling. If `translate: false` and `pivot` is not specified the scaling is allowed only around the center of the transformer. Default is `false`.
-- *pivot:* set to a `taaspace.InvariantVector` to specify a pivot for rotation and scaling. If `pivot` is specified the value of `translate` has no effect. Default is `null`.
+- *pivot:* set to a `taaspace.IVector` to specify a pivot for rotation and scaling. If `pivot` is specified the value of `translate` has no effect. Default is `null`.
 - *tap:* set to `true` to allow emitting of `tap` event. Default is `false`.
 - *tapMaxTravel:*  Default is 20.
 

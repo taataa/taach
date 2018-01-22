@@ -10,7 +10,7 @@ view.mount(viewElement)
 var SIDE = 128
 
 // Snapping grid
-var grid = new taaspace.InvariantGrid(new taaspace.Grid({
+var grid = new taaspace.IGrid(new taaspace.Grid({
   xStep: SIDE,
   xPhase: SIDE / 2,
   yStep: SIDE,

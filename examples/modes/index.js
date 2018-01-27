@@ -3,7 +3,7 @@ var taaspace = require('taaspace')
 
 var space = new taaspace.Space()
 var viewElement = document.getElementById('space')
-var view = new taaspace.SpaceViewHTML(space)
+var view = new taaspace.SpaceView(space)
 view.mount(viewElement)
 
 var data = [

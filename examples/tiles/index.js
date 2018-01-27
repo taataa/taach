@@ -3,20 +3,20 @@ var taaspace = require('taaspace')
 
 var space = new taaspace.Space()
 var viewElement = document.getElementById('space')
-var view = new taaspace.SpaceViewHTML(space)
+var view = new taaspace.SpaceView(space)
 view.mount(viewElement)
 
 // Width and height of a grid tile
 var SIDE = 256
 
 // Snapping grid
-var grid = new taaspace.IGrid(new taaspace.Grid({
+var grid = new taaspace.geom.IGrid({
   xStep: SIDE,
   yStep: SIDE,
   rotateStep: Math.PI / 2,
   scaleStep: 100000000,
   scalePhase: 1
-}), space)
+}, space)
 
 var pickRandom = function (arr) {
   var i = Math.floor(Math.random() * 4)
@@ -81,9 +81,9 @@ taaspace.preload([
   })
 
   // Snapping grid
-  var viewGrid = new taaspace.IGrid(new taaspace.Grid({
+  var viewGrid = new taaspace.geom.IGrid({
     rotateStep: Math.PI / 12
-  }), space)
+  }, space)
 
   tView.on('transformend', function () {
     view.snap(view.atMid(), viewGrid)

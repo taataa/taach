@@ -3,14 +3,14 @@ var taaspace = require('taaspace')
 
 var space = new taaspace.Space()
 var viewElement = document.getElementById('space')
-var view = new taaspace.SpaceViewHTML(space)
+var view = new taaspace.SpaceView(space)
 view.mount(viewElement)
 
 // Width and height of a grid tile
 var SIDE = 128
 
 // Snapping grid
-var grid = new taaspace.IGrid(new taaspace.Grid({
+var grid = new taaspace.geom.IGrid({
   xStep: SIDE,
   xPhase: SIDE / 2,
   yStep: SIDE,
@@ -18,7 +18,7 @@ var grid = new taaspace.IGrid(new taaspace.Grid({
   rotateStep: Math.PI / 2,
   scaleStep: 10000,
   scalePhase: 1
-}), space)
+}, space)
 
 // Load images
 taaspace.preload([
@@ -43,7 +43,7 @@ taaspace.preload([
     // Position & snap scale
     var x = i % rows
     var y = Math.floor(i / rows)
-    px.setLocalSize(new taaspace.Vector(SIDE, SIDE))
+    px.setLocalSize(new taaspace.geom.Vector(SIDE, SIDE))
     px.translate(px.atMid(), grid.at(x, y))
     px.snap(px.atMid(), grid)
 

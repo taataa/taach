@@ -28,7 +28,7 @@ Additional design decisions:
 Let us begin with a simple Taaspace application:
 
     > var space = new taaspace.Space()
-    > var view = new taaspace.SpaceViewHTML(space)
+    > var view = new taaspace.SpaceView(space)
     > view.mount(document.getElementById('space'))
     > var hello = new taaspace.SpaceHTML(space, '<h1>Hello</h1>')
 
@@ -77,16 +77,16 @@ A manager that maps pointer events on a HTML representation to a transformations
 
 **Construction:**
 
-    > var tou = new taach.Touchable(view, plane);
+    > var tou = new taach.Touchable(view, item);
 
 **Parameters:**
 
-- *view:* an instance of `taaspace.SpaceViewHTML`. Only the gestures made on this view will be listened and recognized.
-- *plane:* an instance of `taaspace.SpacePlane` such as `SpaceHTML`, `SpacePixel`, `SpaceGroup`, or `SpaceViewHTML`. Only the gestures made on the HTML representation of the instance are listened and recognized. The instance reacts to the manipulations as specified by the mode.
+- *view:* an instance of `taaspace.SpaceView`. Only the gestures made on this view will be listened and recognized.
+- *item:* an instance of `taaspace.AbstractPlane` such as `SpaceHTML`, `SpacePixel`, `SpaceGroup`, or `SpaceView`. Only the gestures made on the HTML representation of the instance are listened and recognized. The instance reacts to the manipulations as specified by the mode.
 
 **Properties:**
 
-- *view:* the given `SpaceViewHTML`
+- *view:* the given `SpaceView`
 - *plane:* the given `SpacePlane`
 - *element:* the [HTMLElement](https://developer.mozilla.org/en/docs/Web/API/HTMLElement) that receives the original pointer events.
 - *mode:* the current mode object.
@@ -105,7 +105,7 @@ The mode object defines the allowed types of manipulation. Some types are not po
 - *translate:* set `true` to allow horizontal and vertical movement. Default is `false`. If `pivot` is specified the value of `translate` has no effect.
 - *rotate:* set `true` to allow rotation. If `translate: false` and `pivot` is not specified the rotation is allowed only around the center of the transformer. Default is `false`.
 - *scale:* set `true` to allow scaling. If `translate: false` and `pivot` is not specified the scaling is allowed only around the center of the transformer. Default is `false`.
-- *pivot:* set to a `taaspace.IVector` to specify a pivot for rotation and scaling. If `pivot` is specified the value of `translate` has no effect. Default is `null`.
+- *pivot:* set to a `taaspace.geom.IVector` to specify a pivot for rotation and scaling. If `pivot` is specified the value of `translate` has no effect. Default is `null`.
 - *tap:* set to `true` to allow emitting of `tap` event. Default is `false`.
 - *tapMaxTravel:*  Default is 20.
 

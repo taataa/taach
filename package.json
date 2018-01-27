@@ -1,6 +1,6 @@
 {
   "name": "taach",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Touch input gesture library for Taaspace.",
   "keywords": [
     "touch",
@@ -20,31 +20,44 @@
   "license": "MIT",
   "dependencies": {
     "component-emitter": "^1.2.1",
-    "nudged": "^1.2.0"
+    "nudged": "^1.4.0"
   },
   "devDependencies": {
-    "browserify": "^13.1.1",
-    "chai": "^3.5.0",
-    "jshint": "^2.9.4",
-    "mochify": "^2.18.1",
-    "semver": "^5.3.0",
-    "watch": "^1.0.1"
+    "file-loader": "^1.1.5",
+    "finalhandler": "^1.1.0",
+    "genversion": "^2.0.1",
+    "ip": "^1.1.5",
+    "jquery": "^3.2.1",
+    "qrcode-terminal": "^0.11.0",
+    "semver": "^5.4.1",
+    "serve-index": "^1.9.1",
+    "serve-static": "^1.13.1",
+    "standard": "*",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.8.0",
+    "tape-run": "^3.0.1",
+    "url-loader": "^0.6.2",
+    "watch": "^1.0.1",
+    "webpack": "^3.10.0",
+    "webpack-livereload-plugin": "^1.0.0",
+    "webpack-tape-run": "0.0.7"
   },
   "peerDependencies": {
-    "taaspace": "^3.0.0"
+    "taaspace": "^4.0.0"
   },
   "scripts": {
-    "start": "ifconfig | grep inet && python3 -m http.server 8000",
-    "test": "npm run test:lint && npm run test:phantom",
-    "test:phantom": "jshint test/*.js && mochify",
-    "test:lint": "jshint index.js lib/*.js",
-
-    "test:examples-minimal": "jshint examples/minimal/src/*.js",
-    "build:examples-minimal": "npm run test:examples-minimal && browserify examples/minimal/src/index.js -o examples/minimal/app.js && echo 'Build finished.'",
-    "watch:examples-minimal": "watch 'npm run build:examples-minimal' examples/minimal/src lib",
-
-    "test:examples-two": "jshint examples/two/src/*.js",
-    "build:examples-two": "npm run test:examples-two && browserify examples/two/src/index.js -o examples/two/app.js && echo 'Build finished.'",
-    "watch:examples-two": "watch 'npm run build:examples-two' examples/two/src lib"
+    "start": "node examples/server.js",
+    "test": "npm -s run test:headless",
+    "test:headless": "webpack --config test/webpack.headless.config.js",
+    "test:headless:watch": "webpack --watch --config test/webpack.headless.config.js",
+    "test:browser:watch": "webpack --watch --config test/webpack.browser.config.js",
+    "lint": "standard 'lib/**/*.js' 'test/**/*.js' 'examples/**/*.js' && echo 'OK'",
+    "lintfix": "standard --fix 'lib/**/*.js' 'test/**/*.js' 'examples/**/*.js'",
+    "gv": "genversion lib/version.js",
+    "build:ex:tiles": "webpack --watch --config examples/tiles/webpack.config.js",
+    "build:ex:grid": "webpack --watch --config examples/grid/webpack.config.js",
+    "build:ex:minimal": "webpack --watch --config examples/minimal/webpack.config.js",
+    "build:ex:modes": "webpack --watch --config examples/modes/webpack.config.js",
+    "build:ex:view": "webpack --watch --config examples/view/webpack.config.js"
   }
 }

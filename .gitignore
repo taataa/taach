@@ -1,3 +1,9 @@
+# Bundle builds
+**/dist/*
+!**/dist/.gitkeep
+examples/view/app.js
+examples/two/app.js
+
 # Logs
 logs
 *.log
@@ -28,8 +34,4 @@ node_modules
 .lock-wscript
 
 # OS X Related
-*.DS_Store
-
-# Do not include built code
-examples/minimal/app.js
-examples/two/app.js
+**/.DS_Store

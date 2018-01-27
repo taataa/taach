@@ -1,6 +1,6 @@
 {
   "name": "taach",
-  "version": "2.0.0-alpha.5",
+  "version": "2.0.0",
   "description": "Touch input gesture library for Taaspace.",
   "keywords": [
     "touch",
@@ -43,7 +43,7 @@
     "webpack-tape-run": "0.0.7"
   },
   "peerDependencies": {
-    "taaspace": "taataa/taaspace#development"
+    "taaspace": "^4.0.0"
   },
   "scripts": {
     "start": "node examples/server.js",

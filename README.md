@@ -1,3 +1,7 @@
+# DEPRECATED: taach was merged into taataa/tapspace on 2018-02-08
+
+See [taataa/tapspace](https://github.com/taataa/tapspace).
+
 # taach
 
 [![NPM Version](https://badge.fury.io/js/taach.svg)](https://www.npmjs.com/package/taach)
